@@ -50,14 +50,13 @@
     isTooltipShow = true;
   }
   function main() {
-    document.querySelectorAll(".item_title").forEach((el) => {
+    document.querySelectorAll(".item_title > a").forEach((el) => {
       el.addEventListener("mouseover", (event) => {
-        var _a;
         if (!isTooltipShow) {
           const pageX = event.pageX;
           const pageY = event.pageY;
           tooltipEl.style.transform = `translate(${pageX}px, ${pageY}px)`;
-          const href = (_a = el.querySelector("a")) == null ? void 0 : _a.getAttribute("href");
+          const href = el.getAttribute("href");
           const tid = href == null ? void 0 : href.match(/\d+/g)[0];
           fetch(`https://www.v2ex.com/t/${tid}`).then((response) => {
             response.text().then((res) => {
