@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         v2ex-topic-tooltip
 // @namespace    npm/vite-plugin-monkey
-// @version      0.0.1
+// @version      0.0.2
 // @author       monkey
 // @description  show v2ex topic tooltip
 // @license      MIT
@@ -85,14 +85,14 @@
     }
   }
   function main() {
-    document.querySelectorAll(".item_title").forEach((el) => {
+    document.querySelectorAll(".item_title,.item_hot_topic_title").forEach((el) => {
       el.addEventListener("mouseenter", (event) => {
         var _a;
         clearTimeout(timer);
         if (!isTooltipShow) {
           const pageX = event.pageX;
           const pageY = event.pageY;
-          tooltipEl.style.transform = `translate(${pageX}px, ${pageY}px)`;
+          tooltipEl.style.transform = `translate(${pageX - 300}px, ${pageY}px)`;
           const href = (_a = el.querySelector("a")) == null ? void 0 : _a.getAttribute("href");
           const tid = href == null ? void 0 : href.match(/\d+/g)[0];
           showTooltip();

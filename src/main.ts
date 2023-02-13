@@ -82,14 +82,14 @@ async function getContent(tid: string) {
 }
 
 function main() {
-  document.querySelectorAll('.item_title').forEach((el) => {
+  document.querySelectorAll('.item_title,.item_hot_topic_title').forEach((el) => {
     el.addEventListener('mouseenter', (event) => {
       clearTimeout(timer)
 
       if (!isTooltipShow) {
         const pageX = (event as MouseEvent).pageX
         const pageY = (event as MouseEvent).pageY
-        tooltipEl.style.transform = `translate(${pageX}px, ${pageY}px)`
+        tooltipEl.style.transform = `translate(${pageX - 300}px, ${pageY}px)`
         const href = el.querySelector('a')?.getAttribute('href')
         const tid = href?.match(/\d+/g)![0]
         showTooltip()
