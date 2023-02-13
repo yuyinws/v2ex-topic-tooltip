@@ -7,9 +7,11 @@ export default defineConfig({
     monkey({
       entry: 'src/main.ts',
       userscript: {
-        icon: 'https://vitejs.dev/logo.svg',
+        icon: 'https://www.v2ex.com/static/favicon.ico',
         namespace: 'npm/vite-plugin-monkey',
         match: ['*://v2ex.com/*', '*://*.v2ex.com/*'],
+        description: 'show v2ex topic tooltip',
+        license: 'MIT',
       },
     }),
   ],

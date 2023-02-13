@@ -1,11 +1,13 @@
 // ==UserScript==
-// @name       v2ex-topic-tooltip
-// @namespace  npm/vite-plugin-monkey
-// @version    0.0.0
-// @author     monkey
-// @icon       https://vitejs.dev/logo.svg
-// @match      *://v2ex.com/*
-// @match      *://*.v2ex.com/*
+// @name         v2ex-topic-tooltip
+// @namespace    npm/vite-plugin-monkey
+// @version      0.0.1
+// @author       monkey
+// @description  show v2ex topic tooltip
+// @license      MIT
+// @icon         https://www.v2ex.com/static/favicon.ico
+// @match        *://v2ex.com/*
+// @match        *://*.v2ex.com/*
 // ==/UserScript==
 
 (function() {
