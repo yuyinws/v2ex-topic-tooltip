@@ -13,15 +13,17 @@ loadingEl.style.cssText = `
 tooltipEl.appendChild(loadingEl)
 
 const CLOSE_TIMEOUT = 300
-let timer = 0
+const OPEN_TIMEOUT = 500
+let closeTimer = 0
+let openTimer = 0
 let isTooltipShow = false
 
 function createTooltip() {
   tooltipEl.style.cssText = `
     position: absolute;
-    width: 500px;
+    width: 400px;
     min-height: 100px;
-    max-height: 400px;
+    max-height: 300px;
     background: ${isDarkMode() ? '#25303e' : '#fff'};
     padding: 20px;
     border: 1px solid ${isDarkMode() ? '#1f2227' : '#e4e7ed'};
@@ -34,7 +36,7 @@ function createTooltip() {
     align-items: center;
   `
   tooltipEl.addEventListener('mouseenter', () => {
-    clearTimeout(timer)
+    clearTimeout(closeTimer)
   })
 
   tooltipEl.addEventListener('mouseleave', () => {
@@ -44,16 +46,18 @@ function createTooltip() {
 }
 
 function hideTooltip() {
-  clearTimeout(timer)
-  timer = setTimeout(() => {
+  clearTimeout(closeTimer)
+  closeTimer = setTimeout(() => {
     tooltipEl.style.display = 'none'
     isTooltipShow = false
   }, CLOSE_TIMEOUT)
 }
 
 function showTooltip() {
-  tooltipEl.style.display = 'block'
-  isTooltipShow = true
+  openTimer = setTimeout(() => {
+    tooltipEl.style.display = 'block'
+    isTooltipShow = true
+  }, OPEN_TIMEOUT)
 }
 
 async function getContent(tid: string) {
@@ -84,7 +88,8 @@ async function getContent(tid: string) {
 function main() {
   document.querySelectorAll('.item_title,.item_hot_topic_title').forEach((el) => {
     el.addEventListener('mouseenter', (event) => {
-      clearTimeout(timer)
+      clearTimeout(closeTimer)
+      clearTimeout(openTimer)
 
       if (!isTooltipShow) {
         const pageX = (event as MouseEvent).pageX
@@ -99,6 +104,7 @@ function main() {
     })
 
     el.addEventListener('mouseleave', () => {
+      clearTimeout(openTimer)
       hideTooltip()
     })
   })
