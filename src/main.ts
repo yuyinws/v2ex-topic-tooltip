@@ -1,6 +1,7 @@
 import { isDarkMode } from './utils'
 
 const tooltipEl = document.createElement('div')
+tooltipEl.setAttribute('id', 'tooltipEl')
 const loadingEl = document.createElement('div')
 
 loadingEl.innerHTML = 'Fetching...'
@@ -66,7 +67,7 @@ async function getContent(tid: string) {
     tooltipEl.appendChild(loadingEl)
     let domString = ''
     if (sessionStorage.getItem(`v2ex-${tid}`)) {
-      domString = sessionStorage.getItem(`v2ex-${tid}`)!
+      domString = JSON.parse(JSON.stringify(sessionStorage.getItem(`v2ex-${tid}`)!))
     }
     else {
       const response = await fetch(`https://www.v2ex.com/t/${tid}`)
@@ -79,6 +80,9 @@ async function getContent(tid: string) {
     const content = dom.querySelector('#Main > .box')
     tooltipEl.innerHTML = ''
     tooltipEl.append(content!)
+    setTimeout(() => {
+      document.querySelector('#tooltipEl')!.scrollTop = 0
+    }, 500)
   }
   catch (error) {
     console.log('🚀 v2ex-topic-tooltip error', error)
